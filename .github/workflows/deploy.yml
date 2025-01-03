@@ -31,9 +31,22 @@ jobs:
       - name: Deploy application
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            cd ~/app/
+            
+            # Ensure Docker is installed
+            sudo apt update
+            sudo apt install -y docker.io
+            
+            # Navigate to the app directory
+            cd ~/app/ || exit
+            
+            # Pull latest code and build Docker image
+            git pull
             sudo docker build -t fast-api-app .
+
+            # Stop and remove existing container (if any)
             sudo docker stop fast-api-app || true
             sudo docker rm fast-api-app || true
+
+            # Run the new container
             sudo docker run -d --name fast-api-app -p 80:5000 fast-api-app
           EOF
