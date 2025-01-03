@@ -34,13 +34,23 @@ jobs:
             
             # Ensure Docker is installed
             sudo apt update
-            sudo apt install -y docker.io
+            sudo apt install -y docker.io git
+
+            # Create the app directory if it doesn't exist
+            mkdir -p ~/app
+
+            # Clone the repository into ~/app
+            if [ ! -d "~/app/.git" ]; then
+              git clone https://github.com/DashankaNadeeshanDeSilva/Application_deployment_cic_cd_test_with_AWS.git ~/app
+            else
+              cd ~/app
+              git pull
+            fi
             
             # Navigate to the app directory
-            cd ~/app/ || exit
+            cd ~/app/
             
-            # Pull latest code and build Docker image
-            git pull
+            # Build Docker image
             sudo docker build -t fast-api-app .
 
             # Stop and remove existing container (if any)
