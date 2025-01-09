@@ -16,7 +16,10 @@ This project has conducted to deploy FastAPI application in AWS using CI/CD pipe
 - IAM role needs to be spcified when launching an EC2 instance.
 - The pplication that run on the EC2 instance can then use the role-supplied temporary credntials to sign API requests.
 
-## Case 2: Deploy an application on an EC2 instance via CI/CD pipeline
+## Case 2: Deploying a FastAPI Application using Docker on an EC2 Instance
+
+
+## Case 3: Deploy an application on an EC2 instance via CI/CD pipeline
 
 - Create a Docker file or docker-compose file to containerize the application and test for correct funtionality.
 - Create a EC2 instance in AWS [more>](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html):
